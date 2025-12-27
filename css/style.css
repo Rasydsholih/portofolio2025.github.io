@@ -246,7 +246,6 @@ h1, h2, h3, h4, h5, h6, figure {
 #fh5co-features .feature-left {
   margin-bottom: 40px;
   float: left;
-  
 }
 @media screen and (max-width: 992px) {
   #fh5co-features .feature-left {
@@ -254,24 +253,52 @@ h1, h2, h3, h4, h5, h6, figure {
   }
 }
 #fh5co-features .feature-left .icon {
-  display: table;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   width: 100px;
   height: 100px;
   margin: 0 auto;
   background: #fff;
   margin-bottom: 20px;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
   border-radius: 50%;
 }
 #fh5co-features .feature-left .icon i {
   font-size: 50px;
-  display: table-cell;
-  vertical-align: middle;
-  height: 100px;
+  line-height: 1;
   color: #852185 !important;
+}
+
+/* Make inline SVGs and images inside the icon responsive and centered */
+#fh5co-features .feature-left .icon svg,
+#fh5co-features .feature-left .icon img {
+  width: 60%;
+  height: auto;
+  max-width: 100%;
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  #fh5co-features .feature-left .icon {
+    width: 84px;
+    height: 84px;
+  }
+  #fh5co-features .feature-left .icon svg,
+  #fh5co-features .feature-left .icon img {
+    width: 55%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #fh5co-features .feature-left .icon {
+    width: 72px;
+    height: 72px;
+  }
+  #fh5co-features .feature-left .icon svg,
+  #fh5co-features .feature-left .icon img {
+    width: 50%;
+  }
 }
 #fh5co-features .feature-left .feature-copy {
   width: 100%;
