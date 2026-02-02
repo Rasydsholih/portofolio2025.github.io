@@ -78,6 +78,167 @@
 
 
 	<style>
+		html {
+			scroll-behavior: smooth;
+		}
+
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+
+		/* NAVBAR */
+		.navbar {
+			margin: 0;
+			width: 100%;
+			height: 75px;
+			background: #ffffff;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0 24px;
+			position: sticky;
+			top: 0;
+			z-index: 100;
+			box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+		}
+
+		/* BRAND */
+		.nav-brand {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.nav-brand .name {
+    font-size: 21px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-brand .role {
+    font-size: 12px;
+    color: #6b7280;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+
+		/* MENU DESKTOP */
+		.nav-menu {
+			list-style: none;
+			display: flex;
+			gap: 32px;
+			margin: 0;
+			padding: 0;
+		}
+
+		/* ITEM */
+		.nav-menu li {
+			margin: 0;
+			padding: 0;
+		}
+
+		.nav-menu li a {
+			text-decoration: none;
+			font-size: 15px;
+			font-weight: 500;
+			color: #4b5563;
+			position: relative;
+			padding: 6px 0; /* DESKTOP AMAN */
+			display: inline-block;
+		}
+
+		/* underline animation */
+		.nav-menu li a::after {
+			content: '';
+			position: absolute;
+			left: 0;
+			bottom: -4px;
+			width: 0;
+			height: 2px;
+			background: #2563eb;
+			transition: width 0.3s ease;
+		}
+
+		.nav-menu li a:hover::after {
+			width: 100%;
+		}
+
+		/* CTA */
+		.btn-cv {
+			text-decoration: none;
+			padding: 10px 20px;
+			border-radius: 10px;
+			background: linear-gradient(135deg, #2563eb, #1e40af);
+			color: #ffffff;
+			font-size: 14px;
+		}
+
+		/* HAMBURGER */
+		/* pastikan hamburger bisa diklik */
+		.hamburger {
+			display: none;
+			flex-direction: column;
+			gap: 6px;
+			cursor: pointer;
+			z-index: 999; /* FIX penting */
+		}
+
+		.hamburger span {
+			width: 26px;
+			height: 3px;
+			background: #1e3a8a;
+			border-radius: 5px;
+		}
+
+		/* mobile */
+		@media (max-width: 768px) {
+
+			.nav-menu {
+				position: absolute;
+				top: 75px;
+				left: 0;
+				width: 100%;
+				background: #ffffff;
+
+				flex-direction: column;
+				align-items: center;
+
+				padding: 12px 0;
+				margin: 0;
+
+				box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+
+				/* STATE AWAL (TERSEMBUNYI) */
+				transform: translateY(-120%);
+				opacity: 0;
+				pointer-events: none;
+
+				transition: transform 0.35s ease, opacity 0.3s ease;
+			}
+
+			/* SAAT AKTIF */
+			.nav-menu.active {
+				transform: translateY(0);
+				opacity: 1;
+				pointer-events: auto;
+			}
+
+			.hamburger {
+				display: flex;
+			}
+
+			.nav-cta {
+				display: none;
+			}
+		}
+
+
 		.project-image {
 			margin-top: 15px;
 			border: 1px solid #eee;
@@ -140,6 +301,35 @@
 
 	</head>
 	<body>
+
+		<div class="navbar">
+			<div class="nav-brand">
+				<span class="name">Rasyd</span>
+				<span class="role">Web Developer</span>
+			</div>
+		
+			<ul class="nav-menu" id="navMenu">
+				<li><a href="#fh5co-about">About</a></li>
+				<li><a href="#fh5co-portfolio">Portofolio</a></li>
+				<li><a href="#fh5co-blog">Sertifikat</a></li>
+				<li><a href="#fh5co-features">Keterampilan</a></li>
+				<li><a href="#fh5co-consult">Contact</a></li>
+			</ul>
+		
+			<a href="javascript:void(0)" onclick="downloadCV()" class="btn-cv">
+				Download CV
+			</a>
+			
+		
+			<div class="hamburger" id="hamburger">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+		
+		
+		
 	<!-- Modal untuk detail sertifikat -->
 	<div id="certificateModal" class="modal">
 		<span class="close">&times;</span>
@@ -158,7 +348,6 @@
 					<div class="display-t js-fullheight">
 						<div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
 							<div class="profile-thumb" style="background: url(images/saya.jpg);"></div>
-							<h2><span>welcome</span></h2>
 							<h1><span>Rasyd Sholih Hakim</span></h1>
 							<h3><span>Web Developer & Student</span></h3>
 							<p>
@@ -175,7 +364,7 @@
 		</div>
 	</header>
 
-	<div id="fh5co-about" class="animate-box">
+	<div id="fh5co-about" class="animate-box" style="background-color: #3b8ff5;"> 
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
@@ -194,7 +383,7 @@
 				<div class="col-md-8">
 					<h2>Tentang Saya</h2>
 					<p>
-						Saya adalah siswa SMK Wikrama yang fokus pada pengembangan web dan mobile. Memiliki keahlian dalam HTML, CSS, JavaScript, Laravel, Bootstrap, Vue.js, Flutter, ReactTypescript dan Java serta pengolahan database menggunakan Mysql PostgreSql MongoDB. Saya adalah pribadi yang disiplin, pekerja keras, mampu bekerja secara individu maupun dalam tim, serta terbiasa menyelesaikan tugas tepat waktu dengan hasil yang berkualitas.
+						Sebagai siswa SMK Wikrama yang fokus pada web dan mobile development, saya senang mengeksplorasi teknologi modern untuk membangun aplikasi yang fungsional dan mudah digunakan. Saya terbiasa mengerjakan proyek dengan alur yang terstruktur, memperhatikan detail tampilan, serta mengelola data dengan baik. Saya nyaman bekerja secara mandiri maupun dalam tim, dan selalu berusaha memberikan hasil terbaik di setiap proyek yang saya kerjakan.
 					</p>
 					<p>
 						<ul class="fh5co-social-icons">
@@ -208,103 +397,11 @@
 		</div>
 	</div>
 
-	<div id="fh5co-resume" class="p" style="background-color: #3b8ff5;">
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>Educational Background</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 col-md-offset-0">
-					<ul class="timeline">
-						<li class="timeline-heading text-center animate-box">
-							<div><h3>Education</h3></div>
-						</li>
-						<li class="animate-box timeline-unverted">
-							<div class="timeline-badge" style="color: blueviolet; background-color: white;">
-								<i class="fa-solid fa-graduation-cap"></i>
-							</div>
-							<div class="timeline-panel">
-								<div class="timeline-heading">
-									<h3 class="timeline-title">SD/Mis Annajah</h3>
-									<span class="company">2013-2019</span>
-								</div>
-								<div class="timeline-body">
-									<p>MIS AN-NAJAH. Identitas Satuan Pendidikan. Nama, : MIS AN-NAJAH. NPSN, : 60706670. Alamat, : Jl. Veteran II RT.001/003. Desa/Kelurahan, : TELUK PINANG.</p>
-								</div>
-							</div>
-						</li>
-						<li class="timeline-inverted animate-box">
-							<div class="timeline-badge" style="color: blueviolet; background-color: white;">
-								<i class="fa-solid fa-graduation-cap"></i>
-							</div>
-							<div class="timeline-panel">
-								<div class="timeline-heading">
-									<h3 class="timeline-title">Mtss Fathan Mubina</h3>
-									<span class="company">2019-2023</span>
-								</div>
-								<div class="timeline-body">
-									<p>MTSS FATHAN MUBINA. NPSN, : 20280538. Alamat, : Jl. Veteran Iii No. 23 A. Desa/Kelurahan, : CITAPEN. Kecamatan/Kota (LN), : KEC. CIAWI.</p>
-								</div>
-							</div>
-						</li>
-						<li class="animate-box timeline-unverted">
-							<div class="timeline-badge" style="color: blueviolet; background-color: white;">
-								<i class="fa-solid fa-graduation-cap"></i>
-							</div>
-							<div class="timeline-panel">
-								<div class="timeline-heading">
-									<h3 class="timeline-title">SMK WIKRAMA</h3>
-									<span class="company">2023-sekarang</span>
-								</div>
-								<div class="timeline-body">
-									<p>SMKS WIKRAMA BOGOR. NPSN, : 20220299. Alamat, : JL. RAYA WANGUN KEL. SINDANGSARI. Desa/Kelurahan, : SINDANGSARI. Kecamatan/Kota (LN), : KEC. KOTA BOGOR TIMUR
-								</div>
-							</div>
-						</li>
-			    	</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div id="fh5co-resume" class="p" style="background-color: #3b8ff5;">
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>Experience</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 col-md-offset-0">
-					<ul class="timeline">
-						<li class="timeline-heading text-center animate-box">
-							<div><h3>Experience</h3></div>
-						</li>
-						<li class="animate-box timeline-unverted">
-							<div class="timeline-badge" style="color: blueviolet; background-color: white;">
-								<i class="bi bi-person-rolodex"></i>
-							</div>
-							<div class="timeline-panel">
-								<div class="timeline-heading">
-									<h3 class="timeline-title">PT. Solveease</h3>
-									<span class="company">July-Desember (2025)</span>
-								</div>
-								<div class="timeline-body">
-									<p>Saya telah menyelesaikan program magang selama 6 bulan, terhitung dari bulan Juli hingga Desember, di PT SolveEase</p>
-								</div>
-							</div>
-						</li>
-			    	</ul>
-				</div>
-			</div>
-		</div>
-	</div>
 
 
 
 <!-- //background #3b8ff5 -->
-<div id="fh5co-resume" class="fh5co-bg-color">
+<div id="fh5co-portfolio" class="fh5co-bg-color">
 		<div class="container">
 			<div class="row animate-box">
 
@@ -317,21 +414,6 @@
 					<ul class="timeline">
 						<li class="timeline-heading text-center animate-box">
 							<div><h3>PROYEK</h3></div>
-						</li>
-						<li class="animate-box timeline-unverted">
-							<div class="timeline-badge"><i class="icon-suitcase"></i></div>
-							<div class="timeline-panel">
-								<div class="timeline-heading">
-									<h3 class="timeline-title">Apotik</h3>
-									<span class="company"></span>
-								</div>
-								<div class="timeline-body">
-									<p>Project Apotek adalah sebuah sistem yang dirancang untuk mengelola proses penambahan stok obat serta penjualan obat kepada pembeli. Sistem ini memungkinkan petugas apotek untuk mencatat, memperbarui, dan memantau ketersediaan obat, serta memproses transaksi penjualan dengan lebih efisien dan akurat.</p>
-									<div class="project-image">
-										<img src="images/Apotik.png" alt="Tampilan Proyek Apotek" class="img-responsive">
-									</div>
-								</div>
-							</div>
 						</li>
 						<li class="timeline-inverted animate-box">
 							<div class="timeline-badge"><i class="icon-suitcase"></i></div>
@@ -405,6 +487,38 @@
 									<p>Aplikasi ini menampilkan informasi cuaca secara real-time berdasarkan lokasi pengguna. Fitur utamanya meliputi suhu, kelembapan, kondisi langit, dan prakiraan cuaca harian. Desain dibuat responsif dan mudah digunakan pada perangkat mobile..</p>
 									<div class="project-image">
 										<img src="images/cuaca.png" alt="Tampilan Proyek Perpustakaan" class="img-responsive">
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="animate-box timeline-unverted">
+							<div class="timeline-badge"><i class="icon-suitcase"></i></div>
+							<div class="timeline-panel">
+								<div class="timeline-heading">
+									<h3 class="timeline-title">Compro Website</h3>
+									<span class="company"></span>
+								</div>
+								<div class="timeline-body">
+									<p>Melakukan optimalisasi UI/UX pada beberapa halaman website untuk meningkatkan tampilan visual, responsivitas, dan pengalaman pengguna.</p>
+									<div class="project-image">
+										<img src="images/compro.png" alt="Tampilan Proyek Perpustakaan" class="img-responsive">
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="animate-box timeline-inverted">
+							<div class="timeline-badge"><i class="icon-suitcase"></i></div>
+							<div class="timeline-panel">
+								<div class="timeline-heading">
+									<h3 class="timeline-title">Monitoring APP</h3>
+									<span class="company"></span>
+								</div>
+								<div class="timeline-body">
+									<p>Mengembangkan aplikasi monitoring untuk memantau
+										dan mengelola data secara real-time dengan tampilan
+										terstruktur dan sistem yang efisien</p>
+									<div class="project-image">
+										<img src="images/monitoring.png" alt="Tampilan Proyek Perpustakaan" class="img-responsive">
 									</div>
 								</div>
 							</div>
@@ -490,7 +604,16 @@
 						<a href="#" class="blog-bg" style="background-image: url(images/MagarSolve.png);"></a>
 						<div class="blog-text">
 							<h3><a href="#">Internship Program Certificate</a></h3>
-							<p>Saya telah menyelesaikan program magang selama 6 bulan di PT Solve Ease Global Technology pada periode Juli hingga Desember</p>
+							<p>menyelesaikan program magang selama 6 bulan di PT Solve Ease Global Technology</p>
+						</div> 
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="fh5co-blog animate-box">
+						<a href="#" class="blog-bg" style="background-image: url(images/jobready.png);"></a>
+						<div class="blog-text">
+							<h3><a href="#">JobReady: Employability Skills</a></h3>
+							<p>Wadhwani Foundation</p>
 						</div> 
 					</div>
 				</div>
@@ -499,7 +622,7 @@
 	</div>
 	
 
-	<div id="fh5co-features" class="animate-box">
+	<div id="fh5co-features" class="animate-box" >
 		<div class="container">
 			<div class="services-padding">
 				<div class="row">
@@ -795,6 +918,25 @@
 			}
 		});
 		});
+
+		document.addEventListener("DOMContentLoaded", function () {
+			const hamburger = document.getElementById("hamburger");
+			const navMenu = document.getElementById("navMenu");
+
+			hamburger.addEventListener("click", () => {
+				navMenu.classList.toggle("active");
+			});
+		});
+
+		function downloadCV() {
+    const link = document.createElement('a');
+    link.setAttribute('href', 'assets/CV-Rasyd.pdf');
+    link.setAttribute('download', 'CV-Rasyd.pdf');
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
 	</script>
 	
 	<!-- jQuery -->
